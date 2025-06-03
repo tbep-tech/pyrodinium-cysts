@@ -1,0 +1,46 @@
+---
+title: "Old Tampa Bay *P. bahamense* cyst sampling" 
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-copy: true
+    code-link: true
+    code-tools:
+      source: https://github.com/tbep-tech/pyrodinium-cysts/
+editor: source
+css: styles.css
+lightbox: true
+
+execute: 
+  warning: false
+  message: false
+  echo: true
+  out-width: 100%
+---
+
+```{r}
+# load packages
+library(tidyverse)
+library(here)
+library(leaflet)
+
+source(here('R/funcs.R'))
+load(here('data/cystdat.RData'))
+```
+
+### August, 2024
+
+```{r}
+tomap <- cystdat |> 
+  filter(year == 2024 & month == 8)
+cystmap_fun(tomap)
+```
+
+### March, 2025
+
+```{r}
+tomap <- cystdat |> 
+  filter(year == 2025 & month == 3)
+cystmap_fun(tomap)
+```
