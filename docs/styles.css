@@ -74,11 +74,11 @@ h6 {
 
 #editor-map { /* this sets map editor height dynamically if in sidebar */
   height: calc(100vh - 60px) !important;
-} 
+}
 
 #map { /* this sets map height dynamically if in sidebar */
   height: calc(100vh - 60px) !important;
-} 
+}
 
 /* sub sections */
 
@@ -100,6 +100,22 @@ h6 {
   font-weight: 300;
   font-style: italic;
   color: #958984;
+}
+
+/* Make tabs more prominent */
+.nav-pills {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.nav-pills .nav-link {
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #0c6efc; /* Bootstrap primary blue */
 }
 
 .control-label {
@@ -271,7 +287,7 @@ a:hover {
 .panel-tabset > .nav-pills>li>a:hover, .nav-pills>li>a:focus, .nav-pills>li.active>a,     .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
      background-color: #ea6f17;
      }
-     
+
 .panel-tabset > .nav-tabs,
       .panel-tabset > .tab-content {
         border: none;

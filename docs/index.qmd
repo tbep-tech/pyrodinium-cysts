@@ -1,10 +1,8 @@
 ---
-title: "Old Tampa Bay *P. bahamense* cyst sampling" 
+title: "OTB *P. bahamense* cyst sampling" 
 format:
   html:
-    toc: true
-    code-fold: true
-    code-copy: true
+    toc: false
     code-link: true
     code-tools:
       source: https://github.com/tbep-tech/pyrodinium-cysts/
@@ -15,7 +13,7 @@ lightbox: true
 execute: 
   warning: false
   message: false
-  echo: true
+  echo: false
   out-width: 100%
 ---
 
@@ -29,7 +27,33 @@ source(here('R/funcs.R'))
 load(here('data/cystdat.RData'))
 ```
 
-### August, 2024
+::: {.panel-tabset .nav-pills}
+
+### Mar 2015
+
+```{r}
+tomap <- cystdat |> 
+  filter(year == 2015 & month == 3)
+cystmap_fun(tomap)
+```
+
+### Aug 2019
+
+```{r}
+tomap <- cystdat |> 
+  filter(year == 2019 & month == 8)
+cystmap_fun(tomap)
+```
+
+### Aug 2023
+
+```{r}
+tomap <- cystdat |> 
+  filter(year == 2023 & month == 8)
+cystmap_fun(tomap)
+```
+
+### Aug 2024
 
 ```{r}
 tomap <- cystdat |> 
@@ -37,10 +61,12 @@ tomap <- cystdat |>
 cystmap_fun(tomap)
 ```
 
-### March, 2025
+### Mar 2025
 
 ```{r}
 tomap <- cystdat |> 
   filter(year == 2025 & month == 3)
 cystmap_fun(tomap)
 ```
+
+:::

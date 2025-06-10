@@ -1,5 +1,12 @@
 cystmap_fun <- function(dat){
 
+  data(tbseg, package = 'tbeptools')
+
+  # otb bbox
+  otbseg <- tbseg |>
+    dplyr::filter(bay_segment == 'OTB') |>
+    sf::st_bbox()
+
   # Create breakpoints for cyst counts
   breaks <- c(0, 100, 500, 1000, 5000, 10000, Inf)
   break_labels <- c("0-100", "101-500", "501-1000", "1001-5000", "5001-10000", ">10000")
@@ -16,7 +23,7 @@ cystmap_fun <- function(dat){
   names(colors) <- break_labels
 
   # Define sizes for each category
-  sizes <- seq(4, 24, length.out = 6)
+  sizes <- seq(4, 20, length.out = 6)
   names(sizes) <- break_labels
 
   # Add color and size columns to data
@@ -34,9 +41,8 @@ cystmap_fun <- function(dat){
   esri <- rev(grep("^Esri", leaflet::providers, value = TRUE))
 
   m <- leaflet::leaflet(dat) |>
-    fitBounds(lng1 = min(dat$lon), lat1 = min(dat$lat),
-              lng2 = max(dat$lon), lat2 = max(dat$lat))
-
+    leaflet::fitBounds(lng1 = otbseg[['xmin']], lat1 = otbseg[['ymin']],
+              lng2 = otbseg[['xmax']], lat2 = otbseg[['ymax']])
 
   for (provider in esri) {
     m <- m |> leaflet::addProviderTiles(provider, group = provider)
