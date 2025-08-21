@@ -33,3 +33,15 @@ mar2025 <- read.csv(here('data-raw/EPCHC_FWC_Pyrodiniumcystcounts2025.csv')) |>
 cystdat <- bind_rows(prior, aug2024, mar2025)
 
 save(cystdat, file = here('data/cystdat.RData'))
+
+# germination data -------------------------------------------------------
+
+germdat <- read.csv(here('data-raw/PyrodiniumGerminationData_Temperature.csv')) |> 
+  select(
+    temp = Incubation.Temperature..degC., 
+    rep = Replicate,
+    day = Days.after.Isolation, 
+    percvia = Percent.viable.germinated
+  )
+
+save(germdat, file = here('data/germdat.RData'))

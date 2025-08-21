@@ -25,7 +25,10 @@ library(leaflet)
 
 source(here('R/funcs.R'))
 load(here('data/cystdat.RData'))
+load(here('data/germdat.RData'))
 ```
+
+## Cyst maps
 
 ::: {.panel-tabset .nav-pills}
 
@@ -70,3 +73,65 @@ cystmap_fun(tomap)
 ```
 
 :::
+
+## Germination data
+
+```{r}
+toplo1 <- germdat |> 
+  mutate(
+    temp = paste0(temp, '\u00B0', ' C')
+  )
+
+ggplot(toplo1, aes(x = day, y = percvia, group = rep, color = rep)) + 
+  geom_line() + 
+  geom_point() + 
+  scale_y_continuous(labels = scales::percent) + 
+  facet_wrap(~temp) + 
+  theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(), 
+    legend.position = 'bottom'
+  ) + 
+  labs(
+    title = expression(paste(italic('Pyrodinium bahamense'), ' cyst viability by temperature treatment')),
+    subtitle = '14 day exposure, three replicates per treatment',
+    caption = 'Source: FWC FWRI',
+    x = 'Days',
+    y = 'Percent viable', 
+    color = 'Replicate'
+  )
+```
+
+```{r}
+toplo2 <- germdat |> 
+  mutate(temp = factor(temp)) |> 
+  summarise(
+    avev = mean(percvia, na.rm = T), 
+    hiv = t.test(percvia, na.rm = T)$conf.int[2], 
+    lov = t.test(percvia, na.rm = T)$conf.int[1],
+    .by  = c(temp, day)
+  )
+
+ggplot(toplo2, aes(x = day, y = avev, color = temp, group = temp)) + 
+  geom_point(position = position_dodge(width = 0.5)) + 
+  geom_line(position = position_dodge(width = 0.5)) + 
+  scale_color_manual(values = c("#660000", "#990000", "#CC0000", "#FF3333", "#FF6666")) +
+  coord_cartesian(
+    ylim = c(0, 1)
+  ) +
+  geom_errorbar(aes(ymax = hiv, ymin = lov), width = 0, position = position_dodge(width = 0.5), alpha = 0.5) +
+  scale_y_continuous(labels = scales::percent) + 
+  theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(), 
+    legend.position = 'bottom'
+  ) + 
+  labs(
+    title = expression(paste(italic('Pyrodinium bahamense'), ' cyst viability by temperature treatment')),
+    subtitle = '14 day exposure, three replicates per treatment',
+    caption = 'Source: FWC FWRI',
+    x = 'Days',
+    y = 'Percent viable', 
+    color = 'Temp\u00B0 C'
+  )
+```
