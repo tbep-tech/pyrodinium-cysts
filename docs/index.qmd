@@ -73,7 +73,7 @@ cystmap_fun(tomap)
 ```
 
 :::
-
+<!-- 
 ## Germination data
 
 ```{r}
@@ -97,7 +97,7 @@ ggplot(toplo1, aes(x = day, y = percvia, group = rep, color = rep)) +
     subtitle = '14 day exposure, three replicates per treatment',
     caption = 'Source: FWC FWRI',
     x = 'Days',
-    y = 'Percent viable', 
+    y = 'Germination of % viable cysts', 
     color = 'Replicate'
   )
 ```
@@ -131,7 +131,7 @@ ggplot(toplo2, aes(x = day, y = avev, color = temp, group = temp)) +
     subtitle = '14 day exposure, three replicates per treatment',
     caption = 'Source: FWC FWRI',
     x = 'Days',
-    y = 'Percent viable', 
+    y = 'Germination of % viable cysts', 
     color = 'Temp\u00B0 C'
   )
-```
+``` -->
