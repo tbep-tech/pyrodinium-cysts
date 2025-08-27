@@ -82,7 +82,7 @@ toplo1 <- germdat |>
     temp = paste0(temp, '\u00B0', ' C')
   )
 
-ggplot(toplo1, aes(x = day, y = percvia, group = rep, color = rep)) + 
+ggplot(toplo1, aes(x = day, y = percgerm, group = rep, color = rep)) + 
   geom_line() + 
   geom_point() + 
   scale_y_continuous(labels = scales::percent) + 
@@ -93,11 +93,11 @@ ggplot(toplo1, aes(x = day, y = percvia, group = rep, color = rep)) +
     legend.position = 'bottom'
   ) + 
   labs(
-    title = expression(paste(italic('Pyrodinium bahamense'), ' cyst viability by temperature treatment')),
+    title = expression(paste(italic('Pyrodinium bahamense'), ' viable cyst germination by temperature treatment')),
     subtitle = '14 day exposure, three replicates per treatment',
     caption = 'Source: FWC FWRI',
     x = 'Days',
-    y = 'Germination of % viable cysts', 
+    y = '% germination of viable cysts', 
     color = 'Replicate'
   )
 ```
@@ -106,9 +106,9 @@ ggplot(toplo1, aes(x = day, y = percvia, group = rep, color = rep)) +
 toplo2 <- germdat |> 
   mutate(temp = factor(temp)) |> 
   summarise(
-    avev = mean(percvia, na.rm = T), 
-    hiv = t.test(percvia, na.rm = T)$conf.int[2], 
-    lov = t.test(percvia, na.rm = T)$conf.int[1],
+    avev = mean(percgerm, na.rm = T), 
+    hiv = t.test(percgerm, na.rm = T)$conf.int[2], 
+    lov = t.test(percgerm, na.rm = T)$conf.int[1],
     .by  = c(temp, day)
   )
 
@@ -127,11 +127,11 @@ ggplot(toplo2, aes(x = day, y = avev, color = temp, group = temp)) +
     legend.position = 'bottom'
   ) + 
   labs(
-    title = expression(paste(italic('Pyrodinium bahamense'), ' cyst viability by temperature treatment')),
+    title = expression(paste(italic('Pyrodinium bahamense'), ' viable cyst germination by temperature treatment')),
     subtitle = '14 day exposure, three replicates per treatment',
     caption = 'Source: FWC FWRI',
     x = 'Days',
-    y = 'Germination of % viable cysts', 
+    y = '% germination of viable cysts', 
     color = 'Temp\u00B0 C'
   )
 ``` -->

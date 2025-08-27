@@ -41,7 +41,7 @@ germdat <- read.csv(here('data-raw/PyrodiniumGerminationData_Temperature.csv')) 
     temp = Incubation.Temperature..degC., 
     rep = Replicate,
     day = Days.after.Isolation, 
-    percvia = Percent.viable.germinated
+    percgerm = Percent.germinated..of.viable.cysts.
   )
 
 save(germdat, file = here('data/germdat.RData'))
